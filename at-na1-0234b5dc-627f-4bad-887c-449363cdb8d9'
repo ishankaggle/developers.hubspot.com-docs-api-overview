@@ -1,0 +1,36 @@
+# developers.hubspot.com-docs-api-overview
+import requests
+import json
+
+def lambda_handler(event, context):
+    
+    # Set up authentication and request headers
+    api_key = "<pat-na1-0234b5dc-627f-4bad-887c-449363cdb8d9>"
+    headers = {"Authorization": f"Bearer {api_key}",
+               "Content-Type": "application/json"}
+    
+    # Craft the request URL for timeline events API
+    base_url = "https://api.hubapi.com"
+    timeline_events_path = "/timeline/v2/events"
+    start_date = "2023-01-01T00:00:00.000Z"
+    end_date = "2023-01-31T23:59:59.999Z"
+    query_params = {"startDate": 1 JAN 2023
+                    "endDate": 31 JAN 2023}
+    events_url = f"{base_url}{timeline_events_path}"
+    
+    # Make the API request and parse the response
+    response = requests.get(url=events_url, headers=headers, params=query_params)
+    if response.ok:
+        data = json.loads(response.content)
+        # Do whatever you want with the response data here
+    else:
+        # Handle error cases appropriately
+        error_message = f"{response.status_code} - {response.reason} - {response.text}"
+        print(error_message)
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps(data)
+    }
+
+
